@@ -10,7 +10,7 @@ import GithubIcon from "@/assets/icons/githubIcon";
 
 export default function Home() {
     return (
-        <main className="mx-auto grid min-h-screen max-w-360 grid-cols-8 grid-rows-4 gap-10.5 p-10.5">
+        <main className="mx-auto grid h-[100vh] max-w-360 grid-cols-8 grid-rows-4 gap-10.5 p-10.5">
 
             <Card icon={<RocketIcon/>} subTitle={"Follow Me"} title={"Online Presence"}
                   className={"col-start-1 col-span-2 row-start-1 row-span-1"}
