@@ -16,7 +16,7 @@ export function Card({
                          buttons
                      }: CardProps) {
     return (
-        <div className={`rounded-3xl border-2 p-6 gap-2.5 flex flex-col self-stretch${className}`}>
+        <div className={`rounded-3xl bg-gray-bg-primary p-6 gap-2.5 flex flex-col self-stretch${className}`}>
 
             <div className="flex flex-col self-stretch items-center">
                 <div className="flex px-2.5 py-1.5 items-center gap-2 justify-center">
