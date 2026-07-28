@@ -4,7 +4,7 @@ interface CardProps {
     icon: ReactNode;
     subTitle: string;
     title: string;
-    className?: string;
+    className: string;
     buttons: ReactNode;
 }
 
