@@ -96,7 +96,7 @@
     }
 
     to {
-        transform: translateY(calc(-33.333333% - 6.666667px));
+        transform: translateY(calc(-50% - 10px));
     }
 }
 

@@ -1,6 +1,6 @@
 "use client";
 
-import {PointerEvent, useCallback, useEffect, useRef, useState} from "react";
+import {PointerEvent, WheelEvent, useRef, useState} from "react";
 import {LogoMicrosoft, LogoSenac, LogoSenai} from "@/assets/images/export";
 import {CardCertifications} from "@/components/cardCertifications/cardCertifications";
 
@@ -37,61 +37,58 @@ function CertificationsList({hidden = false}: { hidden?: boolean }) {
 }
 
 export function CertificationsCarousel() {
-    const viewportRef = useRef<HTMLDivElement>(null);
+    const trackRef = useRef<HTMLDivElement>(null);
     const draggingRef = useRef(false);
     const pointerYRef = useRef(0);
     const [dragging, setDragging] = useState(false);
 
-    const keepScrollInfinite = useCallback(() => {
-        const viewport = viewportRef.current;
-        if (!viewport) return;
+    const getAnimation = () => trackRef.current?.getAnimations()[0];
 
-        const groups = viewport.firstElementChild?.children;
-        if (!groups || groups.length < 3) return;
+    const moveAnimation = (distance: number) => {
+        const track = trackRef.current;
+        const animation = getAnimation();
+        const groups = track?.children;
+        if (!track || !animation || !groups || groups.length < 2) return;
 
         const groupDistance = (groups[1] as HTMLElement).offsetTop - (groups[0] as HTMLElement).offsetTop;
-        if (groupDistance <= 0) return;
+        const duration = Number(animation.effect?.getTiming().duration);
+        const currentTime = Number(animation.currentTime ?? 0);
+        if (!groupDistance || !duration) return;
 
-        if (viewport.scrollTop < groupDistance || viewport.scrollTop >= groupDistance * 2) {
-            const relativePosition = viewport.scrollTop - groupDistance;
-            const normalizedPosition = ((relativePosition % groupDistance) + groupDistance) % groupDistance;
-            viewport.scrollTop = groupDistance + normalizedPosition;
-        }
-    }, []);
-
-    useEffect(() => {
-        const viewport = viewportRef.current;
-        if (!viewport) return;
-
-        const groups = viewport.firstElementChild?.children;
-        if (!groups || groups.length < 2) return;
-        viewport.scrollTop = (groups[1] as HTMLElement).offsetTop - (groups[0] as HTMLElement).offsetTop;
-    }, []);
+        const nextTime = currentTime + (distance / groupDistance) * duration;
+        animation.currentTime = ((nextTime % duration) + duration) % duration;
+    };
 
     const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
         draggingRef.current = true;
         setDragging(true);
         pointerYRef.current = event.clientY;
+        getAnimation()?.pause();
         event.currentTarget.setPointerCapture(event.pointerId);
     };
 
     const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
-        if (!draggingRef.current || !viewportRef.current) return;
-        viewportRef.current.scrollTop -= event.clientY - pointerYRef.current;
+        if (!draggingRef.current) return;
+        moveAnimation(pointerYRef.current - event.clientY);
         pointerYRef.current = event.clientY;
-        keepScrollInfinite();
     };
 
     const stopDragging = () => {
+        if (!draggingRef.current) return;
         draggingRef.current = false;
         setDragging(false);
+        getAnimation()?.play();
+    };
+
+    const handleWheel = (event: WheelEvent<HTMLDivElement>) => {
+        event.preventDefault();
+        moveAnimation(event.deltaY);
     };
 
     return (
         <div className="relative h-full max-h-[585.5px] overflow-hidden">
             <div
-                ref={viewportRef}
-                className={`certifications-viewport h-full select-none overflow-y-auto ${dragging ? "is-dragging cursor-grabbing" : "cursor-grab"}`}
+                className={`certifications-viewport h-full select-none overflow-hidden ${dragging ? "is-dragging cursor-grabbing" : "cursor-grab"}`}
                 role="region"
                 aria-label="Carrossel de certificações"
                 onMouseLeave={stopDragging}
@@ -99,10 +96,9 @@ export function CertificationsCarousel() {
                 onPointerMove={handlePointerMove}
                 onPointerUp={stopDragging}
                 onPointerCancel={stopDragging}
-                onScroll={keepScrollInfinite}
+                onWheel={handleWheel}
             >
-                <div className="certifications-track flex flex-col gap-5">
-                    <CertificationsList hidden/>
+                <div ref={trackRef} className="certifications-track flex flex-col gap-5">
                     <CertificationsList/>
                     <CertificationsList hidden/>
                 </div>
