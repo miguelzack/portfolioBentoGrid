@@ -108,3 +108,51 @@
 .certifications-viewport.is-dragging .certifications-track {
     animation-play-state: paused;
 }
+
+@keyframes repository-slide-next {
+    from {
+        opacity: 0.35;
+        transform: translateX(7%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes repository-slide-previous {
+    from {
+        opacity: 0.35;
+        transform: translateX(-7%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.repository-slide-next {
+    animation: repository-slide-next 420ms ease-out both;
+}
+
+.repository-slide-previous {
+    animation: repository-slide-previous 420ms ease-out both;
+}
+
+@keyframes repository-modal-enter {
+    from {
+        opacity: 0;
+        transform: translateY(14px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.repository-modal-enter {
+    animation: repository-modal-enter 280ms ease-out both;
+}

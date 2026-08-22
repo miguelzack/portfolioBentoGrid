@@ -11,6 +11,14 @@ import {
 import {ButtonSocialMedia} from "@/components/buttonSocialMedia/buttonSocialMedia";
 import {CertificationsCarousel} from "@/components/certificationsCarousel/certificationsCarousel";
 import {CardTechArsenal} from "@/components/cardTechArsenal/cardTechArsenal";
+import {RepositoriesCarousel, RepositoryProject} from "@/components/repositoriesCarousel/repositoriesCarousel";
+import {EstouDeAcordo} from "@/assets/images/export";
+
+const projects: RepositoryProject[] = [
+    {name: "Estou de acordo", image: EstouDeAcordo},
+    {name: "Estou de acordo", image: EstouDeAcordo},
+    {name: "Estou de acordo", image: EstouDeAcordo}
+];
 
 export default function Home() {
     return (
@@ -61,7 +69,10 @@ export default function Home() {
             }/>
 
             <Card icon={<ProjectsIcon/>} subTitle="My Projects" title="Repositories"
-                  className="col-start-5 col-span-4 row-start-3 row-span-2 gap-5" buttons={undefined}/>
+                  className="col-start-5 col-span-4 row-start-3 row-span-2 gap-1"
+                  contentClassName="flex h-81.5 min-h-0 w-full self-stretch items-center justify-center" buttons={
+                <RepositoriesCarousel projects={projects}/>
+            }/>
 
             <div className="col-start-7 col-span-2 row-start-1 row-span-2 rounded-3xl border-2 p-6">
                 Let&apos;s Work Together

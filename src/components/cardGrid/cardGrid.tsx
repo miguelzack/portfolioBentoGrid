@@ -5,6 +5,7 @@ interface CardProps {
     subTitle: string;
     title: string;
     className: string;
+    contentClassName?: string;
     buttons: ReactNode;
 }
 
@@ -13,6 +14,7 @@ export function Card({
                          subTitle,
                          title,
                          className = "",
+                         contentClassName = "",
                          buttons
                      }: CardProps) {
     return (
@@ -32,7 +34,7 @@ export function Card({
             </div>
 
 
-            <div className="min-h-0">
+            <div className={`min-h-0 ${contentClassName}`}>
                 {buttons}
             </div>
         </div>
