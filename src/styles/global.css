@@ -61,3 +61,50 @@
         list-style: none;
     }
 }
+
+.certifications-viewport {
+    scrollbar-width: none;
+    touch-action: none;
+    overscroll-behavior: contain;
+    -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0,
+        rgba(0, 0, 0, 0.2) 3%,
+        rgba(0, 0, 0, 0.65) 7%,
+        black 13%,
+        black 92%,
+        transparent 100%
+    );
+    mask-image: linear-gradient(
+        to bottom,
+        transparent 0,
+        rgba(0, 0, 0, 0.2) 3%,
+        rgba(0, 0, 0, 0.65) 7%,
+        black 13%,
+        black 92%,
+        transparent 100%
+    );
+}
+
+.certifications-viewport::-webkit-scrollbar {
+    display: none;
+}
+
+@keyframes certifications-auto-scroll {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(calc(-33.333333% - 6.666667px));
+    }
+}
+
+.certifications-track {
+    animation: certifications-auto-scroll 25s linear infinite;
+    will-change: transform;
+}
+
+.certifications-viewport.is-dragging .certifications-track {
+    animation-play-state: paused;
+}

@@ -12,11 +12,11 @@ export function CardCertifications({
                                        text
                                    }: CardCertificationsProps) {
     return (
-        <div className={"flex py-5 px-2.5 justify-center items-center gap-2.5 self-stretch rounded-xl bg-gray-bg-secondary"}>
-            <div className={"flex size-[60px] shrink-0 p-3.5 justify-center items-center rounded-md bg-gray-bg-icon"}>
+        <div className="group flex items-center justify-center gap-2.5 self-stretch rounded-xl border border-transparent bg-gray-bg-secondary px-2.5 py-5 transition-all duration-300 ease-out hover:border-purple/40 hover:bg-gray-bg-terciary hover:shadow-[0_8px_24px_rgba(145,108,231,0.12)]">
+            <div className="flex size-15 shrink-0 items-center justify-center rounded-md bg-gray-bg-icon p-3.5 transition-all duration-300 group-hover:bg-purple/15">
                 <Image src={image} alt={imageAlt} className={"size-full object-contain"}/>
             </div>
-            <p className={"text-gray-font-secondary text-[13px] font-medium"}>{text}</p>
+            <p className="text-[13px] font-medium text-gray-font-secondary transition-colors duration-300 group-hover:text-white">{text}</p>
         </div>
     )
 }

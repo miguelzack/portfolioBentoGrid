@@ -16,7 +16,7 @@ export function Card({
                          buttons
                      }: CardProps) {
     return (
-        <div className={`rounded-3xl bg-gray-bg-primary px-5 py-0 justify-center gap-2.5 flex flex-col self-stretch${className}`}>
+        <div className={`overflow-hidden rounded-3xl bg-gray-bg-primary px-5 py-0 justify-center gap-2.5 flex flex-col self-stretch ${className}`}>
 
             <div className="flex flex-col self-stretch items-center gap-1.5">
                 <div className="flex items-center gap-2 justify-center">
@@ -32,7 +32,7 @@ export function Card({
             </div>
 
 
-            <div className="{className}">
+            <div className="min-h-0">
                 {buttons}
             </div>
         </div>
