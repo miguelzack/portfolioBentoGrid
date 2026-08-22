@@ -5,7 +5,6 @@ import StacksIcon from "@/assets/icons/stacksIcon";
 import ProjectsIcon from "@/assets/icons/projectsIcon";
 import {ButtonSocialMedia} from "@/components/buttonSocialMedia/buttonSocialMedia";
 import LinkedinIcon from "@/assets/icons/linkedinIcon";
-import Link from "next/link";
 import GithubIcon from "@/assets/icons/githubIcon";
 
 export default function Home() {
@@ -13,7 +12,7 @@ export default function Home() {
         <main className="mx-auto grid h-[100vh] max-w-360 grid-cols-8 grid-rows-4 gap-10.5 p-10.5">
 
             <Card icon={<RocketIcon/>} subTitle={"Follow Me"} title={"Online Presence"}
-                  className={"col-start-1 col-span-2 row-start-1 row-span-1"}
+                  className={"col-start-1 col-span-2 row-start-1 row-span-1 px-5 py-0 justify-center items-center["}
                   buttons={
                       <div className={"flex flex-col gap-2.5"}>
                           <ButtonSocialMedia text={"miguel-zacharias-da-silva"} icon={<LinkedinIcon/>}
