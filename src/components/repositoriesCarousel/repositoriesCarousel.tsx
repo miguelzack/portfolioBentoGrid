@@ -8,7 +8,7 @@ export interface RepositoryProject {
     name: string;
     image: StaticImageData | string;
     description?: string;
-    detailsImage?: StaticImageData | string;
+    imageAlt?: string;
     projectUrl?: string;
     repositoryUrl?: string;
 }
@@ -106,14 +106,6 @@ export function RepositoriesCarousel({projects}: RepositoriesCarouselProps) {
         pausedRef.current = false;
     };
 
-    if (projects.length === 0) {
-        return (
-            <div className="flex h-full w-full items-center justify-center rounded-xl bg-gray-bg-secondary text-sm text-gray-font-primary">
-                Adicione seu primeiro projeto.
-            </div>
-        );
-    }
-
     const activeProject = projects[activeIndex] ?? projects[0];
 
     const openProject = () => {
@@ -132,8 +124,13 @@ export function RepositoriesCarousel({projects}: RepositoriesCarouselProps) {
                 role="region"
                 aria-roledescription="carousel"
                 aria-label="Repositórios"
-                onMouseEnter={() => { pausedRef.current = true; }}
-                onMouseLeave={() => { pausedRef.current = false; handlePointerUp(); }}
+                onMouseEnter={() => {
+                    pausedRef.current = true;
+                }}
+                onMouseLeave={() => {
+                    pausedRef.current = false;
+                    handlePointerUp();
+                }}
                 onPointerDown={handlePointerDown}
                 onPointerMove={handlePointerMove}
                 onPointerUp={handlePointerUp}
@@ -152,13 +149,14 @@ export function RepositoriesCarousel({projects}: RepositoriesCarouselProps) {
                     <div className="relative min-h-0 w-full flex-1 overflow-hidden rounded-xl bg-gray-bg-icon">
                         <Image
                             src={activeProject.image}
-                            alt={`Prévia do projeto ${activeProject.name}`}
+                            alt={activeProject.imageAlt ?? `Prévia do projeto ${activeProject.name}`}
                             fill
                             priority={activeIndex === 0}
                             sizes="(max-width: 768px) 90vw, 442px"
                             className="pointer-events-none object-cover transition-transform duration-500 group-hover/repository-card:scale-[1.025]"
                         />
-                        <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/65 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover/repository-card:opacity-100 group-focus-within/repository-card:opacity-100"/>
+                        <div
+                            className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/65 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover/repository-card:opacity-100 group-focus-within/repository-card:opacity-100"/>
                     </div>
                     <button
                         type="button"
@@ -166,7 +164,8 @@ export function RepositoriesCarousel({projects}: RepositoriesCarouselProps) {
                         onClick={openProject}
                         className="absolute inset-0 z-1 flex items-end justify-center rounded-xl pb-10 focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-purple"
                     >
-                        <span className="translate-y-2 rounded-full border border-white/15 bg-black/65 px-3 py-1.5 text-xs font-semibold text-white opacity-0 backdrop-blur-sm transition-all duration-300 group-hover/repository-card:translate-y-0 group-hover/repository-card:opacity-100 group-focus-within/repository-card:translate-y-0 group-focus-within/repository-card:opacity-100">
+                        <span
+                            className="translate-y-2 rounded-full border border-white/15 bg-black/65 px-3 py-1.5 text-xs font-semibold text-white opacity-0 backdrop-blur-sm transition-all duration-300 group-hover/repository-card:translate-y-0 group-hover/repository-card:opacity-100 group-focus-within/repository-card:translate-y-0 group-focus-within/repository-card:opacity-100">
                             Ver detalhes
                         </span>
                     </button>
@@ -174,46 +173,49 @@ export function RepositoriesCarousel({projects}: RepositoriesCarouselProps) {
 
                 {hasMultipleProjects && (
                     <>
-                    <button
-                        type="button"
-                        aria-label="Projeto anterior"
-                        onPointerDown={(event) => event.stopPropagation()}
-                        onClick={(event) => {
-                            event.stopPropagation();
-                            changeSlide(-1);
-                        }}
-                        className="absolute left-3 top-1/2 z-10 grid size-9 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-black/65 text-white opacity-0 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-purple/70 hover:bg-purple group-hover/repositories:opacity-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-purple"
-                    >
-                        <span aria-hidden="true" className="block size-2.5 translate-x-0.5 rotate-45 border-b-2 border-l-2 border-current"/>
-                    </button>
-                    <button
-                        type="button"
-                        aria-label="Próximo projeto"
-                        onPointerDown={(event) => event.stopPropagation()}
-                        onClick={(event) => {
-                            event.stopPropagation();
-                            changeSlide(1);
-                        }}
-                        className="absolute right-3 top-1/2 z-10 grid size-9 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-black/65 text-white opacity-0 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-purple/70 hover:bg-purple group-hover/repositories:opacity-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-purple"
-                    >
-                        <span aria-hidden="true" className="block size-2.5 -translate-x-0.5 rotate-45 border-r-2 border-t-2 border-current"/>
-                    </button>
-                    <div className="absolute bottom-2.5 left-1/2 z-10 flex -translate-x-1/2 gap-1.5 rounded-full bg-black/60 px-2.5 py-1.5 backdrop-blur-sm">
-                        {projects.map((project, projectIndex) => (
-                            <button
-                                key={`${project.name}-${projectIndex}`}
-                                type="button"
-                                aria-label={`Ir para ${project.name}`}
-                                aria-current={activeIndex === projectIndex ? "true" : undefined}
-                                onPointerDown={(event) => event.stopPropagation()}
-                                onClick={(event) => {
-                                    event.stopPropagation();
-                                    goToSlide(projectIndex);
-                                }}
-                                className={`h-1.5 rounded-full transition-all duration-300 ${activeIndex === projectIndex ? "w-5 bg-purple" : "w-1.5 bg-white/45 hover:bg-white"}`}
-                            />
-                        ))}
-                    </div>
+                        <button
+                            type="button"
+                            aria-label="Projeto anterior"
+                            onPointerDown={(event) => event.stopPropagation()}
+                            onClick={(event) => {
+                                event.stopPropagation();
+                                changeSlide(-1);
+                            }}
+                            className="absolute left-3 top-1/2 z-10 grid size-9 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-black/65 text-white opacity-0 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-purple/70 hover:bg-purple group-hover/repositories:opacity-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-purple"
+                        >
+                            <span aria-hidden="true"
+                                  className="block size-2.5 translate-x-0.5 rotate-45 border-b-2 border-l-2 border-current"/>
+                        </button>
+                        <button
+                            type="button"
+                            aria-label="Próximo projeto"
+                            onPointerDown={(event) => event.stopPropagation()}
+                            onClick={(event) => {
+                                event.stopPropagation();
+                                changeSlide(1);
+                            }}
+                            className="absolute right-3 top-1/2 z-10 grid size-9 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-black/65 text-white opacity-0 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-purple/70 hover:bg-purple group-hover/repositories:opacity-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-purple"
+                        >
+                            <span aria-hidden="true"
+                                  className="block size-2.5 -translate-x-0.5 rotate-45 border-r-2 border-t-2 border-current"/>
+                        </button>
+                        <div
+                            className="absolute bottom-2.5 left-1/2 z-10 flex -translate-x-1/2 gap-1.5 rounded-full bg-black/60 px-2.5 py-1.5 backdrop-blur-sm">
+                            {projects.map((project, projectIndex) => (
+                                <button
+                                    key={`${project.name}-${projectIndex}`}
+                                    type="button"
+                                    aria-label={`Ir para ${project.name}`}
+                                    aria-current={activeIndex === projectIndex ? "true" : undefined}
+                                    onPointerDown={(event) => event.stopPropagation()}
+                                    onClick={(event) => {
+                                        event.stopPropagation();
+                                        goToSlide(projectIndex);
+                                    }}
+                                    className={`h-1.5 rounded-full transition-all duration-300 ${activeIndex === projectIndex ? "w-5 bg-purple" : "w-1.5 bg-white/45 hover:bg-white"}`}
+                                />
+                            ))}
+                        </div>
                     </>
                 )}
             </div>
@@ -237,13 +239,14 @@ export function RepositoriesCarousel({projects}: RepositoriesCarouselProps) {
                             onClick={() => setSelectedProject(null)}
                             className="absolute right-4 top-4 z-10 grid size-9 place-items-center rounded-full border border-white/10 bg-black/65 text-white transition-all duration-300 hover:rotate-90 hover:border-purple/70 hover:bg-purple focus-visible:outline-2 focus-visible:outline-purple"
                         >
-                            <span aria-hidden="true" className="relative block size-3.5 before:absolute before:left-1/2 before:top-0 before:h-full before:w-0.5 before:-translate-x-1/2 before:rotate-45 before:bg-current after:absolute after:left-1/2 after:top-0 after:h-full after:w-0.5 after:-translate-x-1/2 after:-rotate-45 after:bg-current"/>
+                            <span aria-hidden="true"
+                                  className="relative block size-3.5 before:absolute before:left-1/2 before:top-0 before:h-full before:w-0.5 before:-translate-x-1/2 before:rotate-45 before:bg-current after:absolute after:left-1/2 after:top-0 after:h-full after:w-0.5 after:-translate-x-1/2 after:-rotate-45 after:bg-current"/>
                         </button>
 
                         <div className="relative mb-5 aspect-video w-full overflow-hidden rounded-2xl bg-gray-bg-icon">
                             <Image
-                                src={selectedProject.detailsImage ?? selectedProject.image}
-                                alt={`Imagem detalhada do projeto ${selectedProject.name}`}
+                                src={selectedProject.image}
+                                alt={selectedProject.imageAlt ?? `Imagem detalhada do projeto ${selectedProject.name}`}
                                 fill
                                 sizes="(max-width: 768px) 95vw, 720px"
                                 className="object-cover"
