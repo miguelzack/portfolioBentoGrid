@@ -11,6 +11,12 @@ export interface RepositoryProject {
     imageAlt?: string;
     projectUrl?: string;
     repositoryUrl?: string;
+    apkUrl?: string;
+    collaborators?: {
+        name: string;
+        url?: string;
+    }[];
+    alert?: string;
 }
 
 interface RepositoriesCarouselProps {
@@ -21,6 +27,7 @@ export function RepositoriesCarousel({projects}: RepositoriesCarouselProps) {
     const [activeIndex, setActiveIndex] = useState(0);
     const [direction, setDirection] = useState<-1 | 1>(1);
     const [animationKey, setAnimationKey] = useState(0);
+    const [autoPlayKey, setAutoPlayKey] = useState(0);
     const [dragOffset, setDragOffset] = useState(0);
     const [dragging, setDragging] = useState(false);
     const [selectedProject, setSelectedProject] = useState<RepositoryProject | null>(null);
@@ -29,7 +36,7 @@ export function RepositoriesCarousel({projects}: RepositoriesCarouselProps) {
     const draggedRef = useRef(false);
     const hasMultipleProjects = projects.length > 1;
 
-    const changeSlide = useCallback((step: -1 | 1) => {
+    const changeSlide = useCallback((step: -1 | 1, resetAutoPlay = false) => {
         if (projects.length < 2) return;
 
         setDirection(step);
@@ -37,6 +44,7 @@ export function RepositoriesCarousel({projects}: RepositoriesCarouselProps) {
             currentIndex + step + projects.length
         ) % projects.length);
         setAnimationKey((key) => key + 1);
+        if (resetAutoPlay) setAutoPlayKey((key) => key + 1);
     }, [projects.length]);
 
     const goToSlide = (projectIndex: number) => {
@@ -44,6 +52,7 @@ export function RepositoriesCarousel({projects}: RepositoriesCarouselProps) {
         setDirection(projectIndex > activeIndex ? 1 : -1);
         setActiveIndex(projectIndex);
         setAnimationKey((key) => key + 1);
+        setAutoPlayKey((key) => key + 1);
     };
 
     useEffect(() => {
@@ -54,7 +63,7 @@ export function RepositoriesCarousel({projects}: RepositoriesCarouselProps) {
         }, 5000);
 
         return () => window.clearInterval(interval);
-    }, [changeSlide, hasMultipleProjects]);
+    }, [autoPlayKey, changeSlide, hasMultipleProjects]);
 
     useEffect(() => {
         if (activeIndex >= projects.length && projects.length > 0) {
@@ -98,7 +107,7 @@ export function RepositoriesCarousel({projects}: RepositoriesCarouselProps) {
         if (!dragging) return;
 
         if (Math.abs(dragOffset) >= 55) {
-            changeSlide(dragOffset < 0 ? 1 : -1);
+            changeSlide(dragOffset < 0 ? 1 : -1, true);
         }
 
         setDragging(false);
@@ -166,7 +175,7 @@ export function RepositoriesCarousel({projects}: RepositoriesCarouselProps) {
                     >
                         <span
                             className="translate-y-2 rounded-full border border-white/15 bg-black/65 px-3 py-1.5 text-xs font-semibold text-white opacity-0 backdrop-blur-sm transition-all duration-300 group-hover/repository-card:translate-y-0 group-hover/repository-card:opacity-100 group-focus-within/repository-card:translate-y-0 group-focus-within/repository-card:opacity-100">
-                            Ver detalhes
+                            View details
                         </span>
                     </button>
                 </article>
@@ -179,7 +188,7 @@ export function RepositoriesCarousel({projects}: RepositoriesCarouselProps) {
                             onPointerDown={(event) => event.stopPropagation()}
                             onClick={(event) => {
                                 event.stopPropagation();
-                                changeSlide(-1);
+                                changeSlide(-1, true);
                             }}
                             className="absolute left-3 top-1/2 z-10 grid size-9 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-black/65 text-white opacity-0 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-purple/70 hover:bg-purple group-hover/repositories:opacity-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-purple"
                         >
@@ -192,7 +201,7 @@ export function RepositoriesCarousel({projects}: RepositoriesCarouselProps) {
                             onPointerDown={(event) => event.stopPropagation()}
                             onClick={(event) => {
                                 event.stopPropagation();
-                                changeSlide(1);
+                                changeSlide(1, true);
                             }}
                             className="absolute right-3 top-1/2 z-10 grid size-9 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-black/65 text-white opacity-0 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-purple/70 hover:bg-purple group-hover/repositories:opacity-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-purple"
                         >
@@ -259,13 +268,44 @@ export function RepositoriesCarousel({projects}: RepositoriesCarouselProps) {
                                 {selectedProject.name}
                             </h2>
 
+                            {selectedProject.alert && (
+                                <p
+                                    role="note"
+                                    className="rounded-xl border border-purple/30 bg-purple/10 px-4 py-3 text-sm leading-6 text-gray-font-secondary"
+                                >
+                                    {selectedProject.alert}
+                                </p>
+                            )}
+
                             {selectedProject.description && (
                                 <p className="max-w-2xl text-sm leading-6 text-gray-font-secondary sm:text-base">
                                     {selectedProject.description}
                                 </p>
                             )}
 
-                            {(selectedProject.projectUrl || selectedProject.repositoryUrl) && (
+                            {selectedProject.collaborators?.length ? (
+                                <p className="text-sm text-gray-font-secondary">
+                                    In collaboration with {selectedProject.collaborators.map((collaborator, index) => (
+                                        <span key={`${collaborator.name}-${index}`}>
+                                            {collaborator.url ? (
+                                                <a
+                                                    href={collaborator.url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="font-semibold text-purple transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-purple"
+                                                >
+                                                    {collaborator.name}
+                                                </a>
+                                            ) : (
+                                                <span className="font-semibold text-white">{collaborator.name}</span>
+                                            )}
+                                            {index < selectedProject.collaborators!.length - 1 && ", "}
+                                        </span>
+                                    ))}
+                                </p>
+                            ) : null}
+
+                            {(selectedProject.projectUrl || selectedProject.repositoryUrl || selectedProject.apkUrl) && (
                                 <div className="mt-2 flex flex-wrap gap-3">
                                     {selectedProject.projectUrl && (
                                         <a
@@ -274,7 +314,20 @@ export function RepositoriesCarousel({projects}: RepositoriesCarouselProps) {
                                             rel="noopener noreferrer"
                                             className="rounded-xl bg-purple px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(145,108,231,0.3)]"
                                         >
-                                            Acessar projeto
+                                            View project
+                                        </a>
+                                    )}
+                                    {selectedProject.apkUrl && (
+                                        <a
+                                            href={selectedProject.apkUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className={!selectedProject.projectUrl && selectedProject.repositoryUrl
+                                                ? "rounded-xl bg-purple px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(145,108,231,0.3)]"
+                                                : "rounded-xl border border-white/15 bg-gray-bg-secondary px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-purple/60 hover:bg-gray-bg-terciary"
+                                            }
+                                        >
+                                            Download APK
                                         </a>
                                     )}
                                     {selectedProject.repositoryUrl && (
@@ -282,9 +335,12 @@ export function RepositoriesCarousel({projects}: RepositoriesCarouselProps) {
                                             href={selectedProject.repositoryUrl}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="rounded-xl border border-white/15 bg-gray-bg-secondary px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-purple/60 hover:bg-gray-bg-terciary"
+                                            className={!selectedProject.projectUrl && !selectedProject.apkUrl
+                                                ? "rounded-xl bg-purple px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(145,108,231,0.3)]"
+                                                : "rounded-xl border border-white/15 bg-gray-bg-secondary px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-purple/60 hover:bg-gray-bg-terciary"
+                                            }
                                         >
-                                            Ver repositório
+                                            View repository
                                         </a>
                                     )}
                                 </div>
