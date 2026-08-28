@@ -15,7 +15,7 @@ import {
     GitIcon,
     JavaIcon,
     GitHubPurpleIcon,
-    PinLocalIcon, GlobeIcon, FlagIcon, FormIcon, ClockIcon
+    PinLocalIcon, GlobeIcon, FlagIcon, FormIcon, ClockIcon, KingIcon, EmailIcon, LinkedinPurpleIcon
 } from "@/assets/icons/export";
 import {ButtonSocialMedia} from "@/components/buttonSocialMedia/buttonSocialMedia";
 import {CertificationsCarousel} from "@/components/certificationsCarousel/certificationsCarousel";
@@ -24,6 +24,7 @@ import {RepositoriesCarousel, RepositoryProject} from "@/components/repositories
 import {EstouDeAcordo, MiguelPhoto} from "@/assets/images/export";
 import Image from "next/image";
 import {MiniCardsInfos} from "@/components/miniCardsInfos/miniCardsInfos";
+import {ButtonLetsWork} from "@/components/buttonLetsWork/buttonLetsWork";
 
 const projects: RepositoryProject[] = [
     {
@@ -126,8 +127,25 @@ export default function Home() {
                     <RepositoriesCarousel projects={projects}/>
                 }/>
 
-                <div className="col-start-7 col-span-2 row-start-1 row-span-2 rounded-3xl border-2 p-6">
-                    Let&apos;s Work Together
+                <div
+                    className="col-start-7 col-span-2 row-start-1 row-span-2 rounded-4xl bg-gray-bg-primary px-5 flex flex-col justify-center items-center w-full gap-6">
+                    <div className="flex flex-col gap-6.25 items-center">
+                        <div
+                            className="flex max-h-16.25 max-w-16.25 items-center justify-center rounded-full bg-gray-bg-terciary p-5">
+                            <KingIcon/>
+                        </div>
+                        <div className="flex flex-col gap-1.25 items-center">
+                            <h2 className="text-white text-[20px] font-semibold">Let’s Work Together</h2>
+                            <h3 className="text-gray-font-primary text-[14px] font-medium">Let's Make Magic Happen
+                                Together!</h3>
+                        </div>
+                    </div>
+                    <div className="flex flex-col gap-5 w-full">
+                        <ButtonLetsWork icon={<EmailIcon/>} text="Email Me" link="mailto:mzsilvaw@gmail.com"/>
+                        <ButtonLetsWork icon={<LinkedinPurpleIcon/>} text="LinkedIn"
+                                        link="https://www.linkedin.com/in/mzsilvaw/"/>
+
+                    </div>
                 </div>
             </main>
         </>

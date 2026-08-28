@@ -1,16 +1,16 @@
 import * as React from "react"
-const LinkedinIconPurple = (props: React.JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>) => (
+const LinkedinPurpleIcon = (props: React.JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
-        width={26}
-        height={26}
+        width={21}
+        height={21}
         fill="none"
         {...props}
     >
         <path
             fill="#916CE7"
-            d="M24 0H2a2 2 0 0 0-2 2v22a2 2 0 0 0 2 2h22a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM9 19a1 1 0 1 1-2 0v-8a1 1 0 1 1 2 0v8ZM8 9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm12 10a1 1 0 0 1-2 0v-4.5a2.5 2.5 0 0 0-5 0V19a1 1 0 0 1-2 0v-8a1 1 0 0 1 1.973-.223A4.5 4.5 0 0 1 20 14.5V19Z"
+            d="M18.858 0H1.572A1.572 1.572 0 0 0 0 1.572v17.287a1.571 1.571 0 0 0 1.572 1.571h17.287a1.571 1.571 0 0 0 1.571-1.572V1.572A1.572 1.572 0 0 0 18.858 0ZM7.072 14.93a.786.786 0 1 1-1.572 0V8.643a.786.786 0 1 1 1.572 0v6.287Zm-.786-7.858a1.179 1.179 0 1 1 0-2.357 1.179 1.179 0 0 1 0 2.357Zm9.43 7.858a.785.785 0 1 1-1.572 0v-3.536a1.964 1.964 0 1 0-3.929 0v3.536a.786.786 0 1 1-1.572 0V8.643a.786.786 0 0 1 1.551-.175 3.536 3.536 0 0 1 5.521 2.926v3.536Z"
         />
     </svg>
 )
-export default LinkedinIconPurple
+export default LinkedinPurpleIcon
