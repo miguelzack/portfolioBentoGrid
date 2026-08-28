@@ -18,3 +18,6 @@ export {default as FormIcon} from "./formIcon";
 export {default as GitHubPurpleIcon} from "./gitHubPurpleIcon";
 export {default as GlobeIcon} from "./globeIcon";
 export {default as PinLocalIcon} from "./pinLocalIcon";
+export {default as EmailIcon} from "./emailIcon";
+export {default as KingIcon} from "./kingIcon";
+export {default as LinkedinPurpleIcon} from "./linkedinIconPurple";

@@ -1,4 +1,5 @@
 export { default as LogoMicrosoft } from "./logoMicrosoft.png"
 export { default as LogoSenac } from "./logoSenac.png"
 export { default as LogoSenai } from "./logoSenai.png"
-export { default as EstouDeAcordo } from "./estouDeAcordo.png"
+export { default as EstouDeAcordo } from "./estouDeAcordo.webp"
+export { default as MiguelPhoto } from "./miguelPhoto.webp"
