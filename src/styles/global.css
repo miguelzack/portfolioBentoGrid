@@ -9,7 +9,9 @@
     --color-white: #E6E6E6;
     --color-gray-font-primary: #999999;
     --color-gray-font-secondary: #CCCCCC;
-    --color-gray-bg-icon: #282828
+    --color-gray-bg-icon: #282828;
+    --color-white-full: #FFFFFF;
+    --color-black-principal-card: #141414;
 }
 
 @layer base {

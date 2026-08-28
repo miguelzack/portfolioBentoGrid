@@ -6,13 +6,24 @@ import {
     ProjectsIcon,
     GithubIcon,
     FigmaIcon,
-    ReactIcon, NextIcon, TailwindIcon, BootstrapIcon, SassIcon, NodeIcon, GitIcon, JavaIcon
+    ReactIcon,
+    NextIcon,
+    TailwindIcon,
+    BootstrapIcon,
+    SassIcon,
+    NodeIcon,
+    GitIcon,
+    JavaIcon,
+    GitHubPurpleIcon,
+    PinLocalIcon, GlobeIcon, FlagIcon, FormIcon, ClockIcon
 } from "@/assets/icons/export";
 import {ButtonSocialMedia} from "@/components/buttonSocialMedia/buttonSocialMedia";
 import {CertificationsCarousel} from "@/components/certificationsCarousel/certificationsCarousel";
 import {CardTechArsenal} from "@/components/cardTechArsenal/cardTechArsenal";
 import {RepositoriesCarousel, RepositoryProject} from "@/components/repositoriesCarousel/repositoriesCarousel";
-import {EstouDeAcordo} from "@/assets/images/export";
+import {EstouDeAcordo, MiguelPhoto} from "@/assets/images/export";
+import Image from "next/image";
+import {MiniCardsInfos} from "@/components/miniCardsInfos/miniCardsInfos";
 
 const projects: RepositoryProject[] = [
     {
@@ -46,7 +57,41 @@ export default function Home() {
                     <CertificationsCarousel/>
                 }/>
 
-                <div className="col-start-3 col-span-4 row-start-1 row-span-2 rounded-3xl border-2 p-6">About me</div>
+                <div
+                    className="col-start-3 col-span-4 row-start-1 row-span-2 p-6 flex flex-col gap-2.5 rounded-4xl bg-gray-bg-primary h-full justify-center ">
+                    <div className="flex py-2.5 flex-col justify-between items-center h-full max-h-47.5">
+                        <div className="flex justify-center items-center gap-3.75">
+                            <Image src={MiguelPhoto} alt="Foto de Miguel Silva"/>
+                            <div className="flex flex-col items-start gap-2.5">
+                                <h1 className="text-white text-[22px] font-semibold">Miguel Silva</h1>
+                                <h2 className="text-gray-font-primary text-sm font-medium">I’m a <span
+                                    className="text-purple font-semibold">Front-End Developer & UI/UX Designer</span>
+                                </h2>
+                            </div>
+                        </div>
+                        <p className="text-center text-white-full text-sm font-semibold">I’m a Junior Developer with
+                            experience in full-stack web development using JavaScript, React, and Node.js. With a
+                            background in Informatics and Systems Development, I’m open to new projects, collaborations,
+                            and opportunities in technology.</p>
+
+                    </div>
+                    <div
+                        className="flex flex-wrap items-center justify-center gap-2.5 self-stretch rounded-[10px] border-[0.8px] border-[rgba(255,255,255,0.06)] bg-black-principal-card p-3">
+                        <MiniCardsInfos icon={<PinLocalIcon/>} text="Brazil"/>
+                        <MiniCardsInfos icon={<GlobeIcon/>} text="Portuguese and English"/>
+                        <MiniCardsInfos icon={<FlagIcon/>} text="Front-End Developer"/>
+                        <MiniCardsInfos icon={<FlagIcon/>} text="UI/UX Designer"/>
+                        <MiniCardsInfos icon={<FormIcon/>} text="SENAI Suíço-Brasileira"/>
+                        <MiniCardsInfos icon={<ClockIcon/>} text="BRT"/>
+                    </div>
+
+                    <a href="https://github.com/miguelzack" target="_blank"
+                       className="flex py-4 px-2.5 justify-center items-center gap-2.5 rounded-[10px] bg-gray-bg-terciary border border-transparent transition-all duration-300 ease-out hover:border-purple/40 hover:bg-gray-bg-terciary hover:shadow-[0_8px_24px_rgba(145,108,231,0.12)]">
+                        <GitHubPurpleIcon/> <span className="text-[13px] font-medium text-gray-font-secondary">Visit my Github</span>
+                    </a>
+
+
+                </div>
 
                 <Card icon={<StacksIcon/>} subTitle="My Stacks" title="Tech Arsenal"
                       className="col-start-3 col-span-2 row-start-3 row-span-2 gap-2.5" buttons={
