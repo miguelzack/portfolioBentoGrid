@@ -66,7 +66,7 @@
 
 .certifications-viewport {
     scrollbar-width: none;
-    touch-action: none;
+    touch-action: pan-y;
     overscroll-behavior: contain;
     -webkit-mask-image: linear-gradient(
         to bottom,
@@ -86,6 +86,12 @@
         black 92%,
         transparent 100%
     );
+}
+
+@media (min-width: 768px) {
+    .certifications-viewport {
+        touch-action: none;
+    }
 }
 
 .certifications-viewport::-webkit-scrollbar {

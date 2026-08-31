@@ -173,9 +173,9 @@ const projects: RepositoryProject[] = [
 export default function Home() {
     return (
         <>
-            <main className="mx-auto grid h-screen max-w-360 grid-cols-8 grid-rows-4 gap-10.5 p-10.5">
+            <main className="mx-auto grid min-h-screen max-w-360 grid-cols-1 gap-4 p-4 sm:gap-6 sm:p-6 md:grid-cols-2 lg:gap-8 xl:h-screen xl:grid-cols-8 xl:grid-rows-4 xl:gap-10.5 xl:p-10.5">
                 <Card icon={<RocketIcon/>} subTitle="Follow Me" title="Online Presence"
-                      className="col-start-1 col-span-2 row-start-1 row-span-1 justify-center"
+                      className="order-2 min-h-52 justify-center xl:order-0 xl:col-start-1 xl:col-span-2 xl:row-start-1 xl:row-span-1"
                       buttons={
                           <div className="flex flex-col gap-2.5">
                               <ButtonSocialMedia text="miguel-zacharias-da-silva" icon={<LinkedinIcon/>}
@@ -186,23 +186,23 @@ export default function Home() {
                       }/>
 
                 <Card icon={<RocketIcon/>} subTitle="My Certifications" title="Certifications"
-                      className="col-start-1 col-span-2 row-start-2 row-span-3 gap-5 pt-5 flex justify-start" buttons={
+                      className="order-6 min-h-112.5 gap-5 pt-5 md:col-span-2 xl:order-0 xl:col-start-1 xl:col-span-2 xl:row-start-2 xl:row-span-3 xl:min-h-0 xl:justify-start" contentClassName="h-96 sm:h-120 xl:h-full" buttons={
                     <CertificationsCarousel/>
                 }/>
 
                 <div
-                    className="col-start-3 col-span-4 row-start-1 row-span-2 p-6 flex flex-col gap-2.5 rounded-4xl bg-gray-bg-primary h-full justify-center ">
-                    <div className="flex py-2.5 flex-col justify-between items-center h-full max-h-47.5">
-                        <div className="flex justify-center items-center gap-3.75">
-                            <Image src={MiguelPhoto} alt="Foto de Miguel Silva"/>
-                            <div className="flex flex-col items-start gap-2.5">
-                                <h1 className="text-white text-[22px] font-semibold">Miguel Silva</h1>
-                                <h2 className="text-gray-font-primary text-sm font-medium">I’m a <span
+                    className="order-1 flex flex-col justify-center gap-4 rounded-3xl bg-gray-bg-primary p-5 sm:gap-5 sm:p-6 md:col-span-2 xl:order-0 xl:col-start-3 xl:col-span-4 xl:row-start-1 xl:row-span-2 xl:h-full xl:gap-2.5">
+                    <div className="flex flex-col items-center gap-5 py-2.5 xl:h-full xl:max-h-47.5 xl:justify-between">
+                        <div className="flex flex-col items-center justify-center gap-4 text-center sm:flex-row sm:gap-3.75 sm:text-left">
+                            <Image src={MiguelPhoto} alt="Foto de Miguel Silva" className="h-auto w-20 sm:w-auto"/>
+                            <div className="flex flex-col items-center gap-2.5 sm:items-start">
+                                <h1 className="text-[22px] font-semibold text-white">Miguel Silva</h1>
+                                <h2 className="text-sm font-medium text-gray-font-primary">I’m a <span
                                     className="text-purple font-semibold">Front-End Developer & UI/UX Designer</span>
                                 </h2>
                             </div>
                         </div>
-                        <p className="text-center text-white-full text-sm font-semibold">I’m a Junior Developer with
+                        <p className="max-w-3xl text-center text-sm font-semibold text-white-full">I’m a Junior Developer with
                             experience in full-stack web development using JavaScript, React, and Node.js. With a
                             background in Informatics and Systems Development, I’m open to new projects, collaborations,
                             and opportunities in technology.</p>
@@ -227,7 +227,7 @@ export default function Home() {
                 </div>
 
                 <Card icon={<StacksIcon/>} subTitle="My Stacks" title="Tech Arsenal"
-                      className="col-start-3 col-span-2 row-start-3 row-span-2 gap-2.5" buttons={
+                      className="order-4 min-h-96 md:min-h-0 xl:order-0 xl:col-start-3 xl:col-span-2 xl:row-start-3 xl:row-span-2" buttons={
                     <div className={"flex flex-col gap-3.5"}>
                         <div className={"flex gap-2.5 w-full"}>
                             <CardTechArsenal icon={<FigmaIcon/>} text={"Figma"}/>
@@ -254,14 +254,14 @@ export default function Home() {
                 }/>
 
                 <Card icon={<ProjectsIcon/>} subTitle="My Projects" title="Repositories"
-                      className="col-start-5 col-span-4 row-start-3 row-span-2 gap-1"
-                      contentClassName="flex h-81.5 min-h-0 w-full self-stretch items-center justify-center" buttons={
+                      className="order-5 min-h-96 md:min-h-0 xl:order-0 xl:col-start-5 xl:col-span-4 xl:row-start-3 xl:row-span-2"
+                      contentClassName="flex h-72 min-h-0 w-full self-stretch items-center justify-center sm:h-81.5 xl:h-81.5" buttons={
                     <RepositoriesCarousel projects={projects}/>
                 }/>
 
                 <div
-                    className="col-start-7 col-span-2 row-start-1 row-span-2 rounded-4xl bg-gray-bg-primary px-5 flex flex-col justify-center items-center w-full gap-6">
-                    <div className="flex flex-col gap-6.25 items-center">
+                    className="order-3 flex w-full flex-col items-center justify-center gap-6 rounded-3xl bg-gray-bg-primary px-5 py-7 md:min-h-52 xl:order-0 xl:col-start-7 xl:col-span-2 xl:row-start-1 xl:row-span-2 xl:py-0">
+                    <div className="flex flex-col items-center gap-5 sm:gap-6.25">
                         <div
                             className="flex max-h-16.25 max-w-16.25 items-center justify-center rounded-full bg-gray-bg-terciary p-5">
                             <KingIcon/>
@@ -272,7 +272,7 @@ export default function Home() {
                                 Together!</h3>
                         </div>
                     </div>
-                    <div className="flex flex-col gap-5 w-full">
+                    <div className="flex w-full flex-col gap-3 sm:gap-5">
                         <ButtonLetsWork
                             icon={<EmailIcon/>}
                             text="Email Me"

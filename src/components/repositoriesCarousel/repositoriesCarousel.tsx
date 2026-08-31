@@ -129,7 +129,7 @@ export function RepositoriesCarousel({projects}: RepositoriesCarouselProps) {
     return (
         <>
             <div
-                className={`group/repositories relative mx-auto h-full max-h-81.5 w-full max-w-125.5 overflow-hidden rounded-xl bg-gray-bg-secondary touch-pan-y ${dragging ? "cursor-grabbing" : hasMultipleProjects ? "cursor-grab" : ""}`}
+                className={`group/repositories relative mx-auto h-full w-full max-w-125.5 overflow-hidden rounded-xl bg-gray-bg-secondary touch-pan-y ${dragging ? "cursor-grabbing" : hasMultipleProjects ? "cursor-grab" : ""}`}
                 role="region"
                 aria-roledescription="carousel"
                 aria-label="Repositórios"
@@ -147,7 +147,7 @@ export function RepositoriesCarousel({projects}: RepositoriesCarouselProps) {
             >
                 <article
                     key={`${activeIndex}-${animationKey}`}
-                    className={`group/repository-card relative flex h-full w-full flex-col items-center justify-center gap-2.5 rounded-xl border border-transparent px-7.5 py-5 transition-[translate,border-color,background-color,box-shadow] ease-out hover:border-purple/45 hover:bg-gray-bg-terciary hover:shadow-[0_12px_32px_rgba(145,108,231,0.16)] focus-within:border-purple ${dragging ? "duration-0" : "duration-300"} ${direction === 1 ? "repository-slide-next" : "repository-slide-previous"}`}
+                    className={`group/repository-card relative flex h-full w-full flex-col items-center justify-center gap-2.5 rounded-xl border border-transparent px-4 py-5 transition-[translate,border-color,background-color,box-shadow] ease-out hover:border-purple/45 hover:bg-gray-bg-terciary hover:shadow-[0_12px_32px_rgba(145,108,231,0.16)] focus-within:border-purple sm:px-7.5 ${dragging ? "duration-0" : "duration-300"} ${direction === 1 ? "repository-slide-next" : "repository-slide-previous"}`}
                     style={{
                         translate: `${dragOffset}px 0`,
                     }}
@@ -190,7 +190,7 @@ export function RepositoriesCarousel({projects}: RepositoriesCarouselProps) {
                                 event.stopPropagation();
                                 changeSlide(-1, true);
                             }}
-                            className="absolute left-3 top-1/2 z-10 grid size-9 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-black/65 text-white opacity-0 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-purple/70 hover:bg-purple group-hover/repositories:opacity-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-purple"
+                            className="absolute left-2 top-1/2 z-10 grid size-8 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-black/65 text-white opacity-100 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-purple/70 hover:bg-purple focus-visible:outline-2 focus-visible:outline-purple sm:left-3 sm:size-9 sm:opacity-0 sm:group-hover/repositories:opacity-100 sm:focus-visible:opacity-100"
                         >
                             <span aria-hidden="true"
                                   className="block size-2.5 translate-x-0.5 rotate-45 border-b-2 border-l-2 border-current"/>
@@ -203,7 +203,7 @@ export function RepositoriesCarousel({projects}: RepositoriesCarouselProps) {
                                 event.stopPropagation();
                                 changeSlide(1, true);
                             }}
-                            className="absolute right-3 top-1/2 z-10 grid size-9 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-black/65 text-white opacity-0 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-purple/70 hover:bg-purple group-hover/repositories:opacity-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-purple"
+                            className="absolute right-2 top-1/2 z-10 grid size-8 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-black/65 text-white opacity-100 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-purple/70 hover:bg-purple focus-visible:outline-2 focus-visible:outline-purple sm:right-3 sm:size-9 sm:opacity-0 sm:group-hover/repositories:opacity-100 sm:focus-visible:opacity-100"
                         >
                             <span aria-hidden="true"
                                   className="block size-2.5 -translate-x-0.5 rotate-45 border-r-2 border-t-2 border-current"/>
