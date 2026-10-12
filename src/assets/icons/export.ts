@@ -21,3 +21,6 @@ export {default as PinLocalIcon} from "./pinLocalIcon";
 export {default as EmailIcon} from "./emailIcon";
 export {default as KingIcon} from "./kingIcon";
 export {default as LinkedinPurpleIcon} from "./linkedinIconPurple";
+export {default as AzureIcon} from "./azureIcon";
+export {default as SpringBootIcon} from "./springBootIcon";
+export {default as IaIcon} from "./iaIcon";
