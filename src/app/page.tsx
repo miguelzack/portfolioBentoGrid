@@ -29,7 +29,7 @@ import {
     EstouDeAcordo, ExchangePort, GlassUIPort, LandwindPort, LoginPort,
     MiguelPhoto,
     PokedexPort,
-    PokemonSearchFormPort, SenaiCursosPort, SpringPort
+    PokemonSearchFormPort, QRScannerPort, SenaiCursosPort, SpringPort
 } from "@/assets/images/export";
 import Image from "next/image";
 import {MiniCardsInfos} from "@/components/miniCardsInfos/miniCardsInfos";
@@ -63,6 +63,15 @@ const projects: RepositoryProject[] = [
         repositoryUrl: "https://github.com/miguelzack/frontendEcommerce",
         alert: "Academic project developed exclusively for educational purposes, with no commercial intent. Any brands or companies mentioned were used solely as references and have no affiliation with this project. FOR TESTING PURPOSES, PLEASE WAIT A MOMENT FOR THE BACKEND TO START. ONLY RELOAD THE PAGE AFTER A SHORT WHILE.",
         description: "E-commerce project developed with React, Styled Components, and JavaScript. The project is a front-end application that consumes a back-end API to provide a complete shopping experience for users.",
+    },
+    {
+        name: "Scanner QR",
+        image: QRScannerPort,
+        imageAlt: "Fotos do app 'Scanner QR' mostrando suas páginas.",
+        apkUrl: "https://github.com/miguelzack/scanner-qr-mobile/releases/tag/v1.0.0",
+        repositoryUrl: "https://github.com/miguelzack/scanner-qr-mobile",
+        alert: "Academic project developed exclusively for educational purposes, with no commercial intent. Any brands or companies mentioned were used solely as references and have no affiliation with this project.",
+        description: "Scanner QR is a mobile app for scanning, understanding, and organizing QR codes. Instead of treating every code as a plain link, it recognizes what you scanned—such as a Pix payment, Wi-Fi network, website, or contact detail—and suggests the right next step. Your scan history is stored locally on your device, and you can export multiple scans together in a single TXT file.",
     },
     {
         name: "CineMood",
