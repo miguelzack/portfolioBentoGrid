@@ -12,6 +12,7 @@ const certifications = [
         text: "SENAC – Assistente de Desenvolvimento de Aplicativos Computacionais"
     },
     {image: LogoMicrosoft, imageAlt: "Logo Microsoft", text: "Microsoft Certified - Azure Fundamentals (AZ-900)"},
+    {image: LogoMicrosoft, imageAlt: "Logo Microsoft", text: "Microsoft Certified - GitHub Foundations (GH-900)"},
     {
         image: LogoSenai,
         imageAlt: "Logo Senai",
