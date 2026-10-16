@@ -218,7 +218,7 @@ export default function Home() {
                         </div>
                         <p className="max-w-3xl text-center text-sm font-semibold text-white-full">Junior Full-Stack
                             Developer working with JavaScript, React, Node.js, and Java. Microsoft Azure Fundamentals
-                            (AZ-900) certified, focused on building modern and practical digital solutions.</p>
+                            (AZ-900) certified and Microsoft GitHub Foundations (GH-900) certified, focused on building modern and practical digital solutions.</p>
 
                     </div>
                     <div
