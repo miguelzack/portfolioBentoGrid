@@ -40,7 +40,7 @@ const projects: RepositoryProject[] = [
         name: "Estou de acordo",
         image: EstouDeAcordo,
         imageAlt: "Foto do portal 'Estou de Acordo' mostrando a página inicial.",
-        projectUrl: "https://app.estoudeacordo.com.br/",
+        projectUrl: "https://new-estou-de-acordo.vercel.app/",
         description: "Estou de Acordo is a solution that transforms your offer into a legally valid contract with legal assurance, equivalent to a notarized document. The project is hosted by the company that owns the group, which is also responsible for the website.",
     },
     {
